@@ -70,7 +70,7 @@ namespace Citizens
 
         private string GenerateVatId(DateTime birthDate, Gender gender)
         {
-            string idBirthDate = birthDate.ToOADate().ToString();
+            string idBirthDate = (birthDate.ToOADate() - 1).ToString();
             idBirthDate = new string('0', 5 - idBirthDate.Length) + idBirthDate;
             int idNumber = 0;
 
@@ -81,7 +81,7 @@ namespace Citizens
                 string vatId = citizens[i].VatId;
                 if (vatId.StartsWith(idBirthDate))
                 {
-                    idNumber = int.Parse(vatId.Substring(5, 8));
+                    idNumber = int.Parse(vatId.Substring(5, 4));
                     if (idNumber % 2 == (int)gender + 1 && idNumber > maxNumber)
                     {
                         maxNumber = idNumber;
