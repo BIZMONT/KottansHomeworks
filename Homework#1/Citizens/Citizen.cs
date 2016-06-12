@@ -30,7 +30,7 @@ namespace Citizens
 
             this.lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
 
-            if (DateTime.Compare(birthDate.Date, DateTime.Now.Date) == 1)
+            if (DateTime.Compare(birthDate.Date, SystemDateTime.Now().Date) == 1)
             {
                 throw new ArgumentException("Date is inavalid");
             }
