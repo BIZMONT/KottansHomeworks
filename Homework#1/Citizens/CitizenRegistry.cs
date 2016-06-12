@@ -55,12 +55,19 @@ namespace Citizens
                 throw new IndexOutOfRangeException("Registry is full!");
             }
 
-            if (citizen.VatId == null)
+            if (string.IsNullOrEmpty(citizen.VatId))
             {
                 citizen.VatId = GenerateVatId(citizen.BirthDate, citizen.Gender);
             }
 
-            citizens[count++] = citizen;
+            if (Contains(citizen.VatId))
+            {
+                throw new InvalidOperationException("This citizen is already exist!");
+            }
+            else
+            {
+                citizens[count++] = citizen;
+            }
         }
 
         public string Stats()
@@ -103,6 +110,24 @@ namespace Citizens
             int idChecksum = int.Parse(idBirthDate[0].ToString()) * (-1) + int.Parse(idBirthDate[1].ToString()) * 5 + int.Parse(idBirthDate[2].ToString()) * 7 + int.Parse(idBirthDate[4].ToString()) * 9 + int.Parse(idBirthDate[4].ToString()) * 4 + int.Parse(idNumberString[0].ToString()) * 6 + int.Parse(idNumberString[1].ToString()) * 10 + int.Parse(idNumberString[2].ToString()) * 5 + int.Parse(idNumberString[3].ToString()) * 7;
 
             return idBirthDate + idNumberString + idChecksum;
+        }
+
+        private bool Contains(string vatId)
+        {
+            if (string.IsNullOrEmpty(vatId))
+            {
+                return false;
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                if (string.Compare(citizens[i].VatId, vatId) == 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
