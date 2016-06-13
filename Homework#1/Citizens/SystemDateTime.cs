@@ -4,6 +4,6 @@ namespace Citizens
 {
     public static class SystemDateTime
     {
-        public static Func<DateTime> Now = () => DateTime.Now;
+        public static Func<DateTime> Now = () => DateTime.UtcNow;
     }
 }

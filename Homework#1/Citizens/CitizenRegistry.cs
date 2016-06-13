@@ -8,6 +8,7 @@ namespace Citizens
         private ICitizen[] citizens;
         private int count;
         private uint length;
+        private DateTime lastRegistrationTime;
 
         public CitizenRegistry()
         {
@@ -51,18 +52,19 @@ namespace Citizens
                 throw new IndexOutOfRangeException("Registry is full!");
             }
 
-            if (string.IsNullOrEmpty(citizen.VatId))
-            {
-                citizen.VatId = GenerateVatId(citizen.BirthDate, citizen.Gender);
-            }
-
             if (Contains(citizen.VatId))
             {
                 throw new InvalidOperationException("This citizen is already exist!");
             }
             else
             {
+                if (string.IsNullOrEmpty(citizen.VatId))
+                {
+                    citizen.VatId = GenerateVatId(citizen.BirthDate, citizen.Gender);
+                }
+
                 citizens[count++] = citizen;
+                lastRegistrationTime = SystemDateTime.Now();
             }
         }
 
@@ -72,6 +74,11 @@ namespace Citizens
             int womanCount = Count(Gender.Female);
 
             string stats = "men".ToQuantity(manCount) + " and " + "women".ToQuantity(womanCount);
+
+            if (manCount != 0 || womanCount != 0)
+            {
+                stats += ". Last registration was " + lastRegistrationTime.Humanize();
+            }
 
             return stats;
         }
