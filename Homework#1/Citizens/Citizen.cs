@@ -66,5 +66,13 @@ namespace Citizens
             get { return this.vatId; }
             set { this.vatId = value; }
         }
+
+        public object Clone()
+        {
+            Citizen clone = new Citizen(this.FirstName, this.LastName, this.BirthDate, this.gender);
+            clone.VatId = this.VatId;
+
+            return clone;
+        }
     }
 }

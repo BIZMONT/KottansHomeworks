@@ -63,7 +63,7 @@ namespace Citizens
                     citizen.VatId = GenerateVatId(citizen.BirthDate, citizen.Gender);
                 }
 
-                citizens[count++] = citizen;
+                citizens[count++] = (ICitizen)citizen.Clone();
                 lastRegistrationTime = SystemDateTime.Now();
             }
         }

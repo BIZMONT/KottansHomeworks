@@ -2,7 +2,7 @@
 
 namespace Citizens
 {
-    public interface ICitizen
+    public interface ICitizen : ICloneable
     {
         string FirstName { get; }
 
