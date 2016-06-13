@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using Citizens;
 using Citizens.Tests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Citizens.Tests.Helpers;
 
 namespace Citizens.Tests
 {

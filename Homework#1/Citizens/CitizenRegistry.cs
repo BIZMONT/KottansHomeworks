@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Humanizer;
 
 namespace Citizens
 {
@@ -72,7 +68,12 @@ namespace Citizens
 
         public string Stats()
         {
-            throw new NotImplementedException();
+            int manCount = Count(Gender.Male);
+            int womanCount = Count(Gender.Female);
+
+            string stats = "men".ToQuantity(manCount) + " and " + "women".ToQuantity(womanCount);
+
+            return stats;
         }
 
         private string GenerateVatId(DateTime birthDate, Gender gender)
@@ -127,6 +128,20 @@ namespace Citizens
             }
 
             return false;
+        }
+
+        private int Count(Gender gender)
+        {
+            int counter = 0;
+            for (int i = 0; i < count; i++)
+            {
+                if (citizens[i].Gender == gender)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
         }
     }
 }
