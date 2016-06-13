@@ -106,8 +106,9 @@ namespace Citizens
             string idNumberString = idNumber.ToString();
             idNumberString = new string('0', 4 - idNumberString.Length) + idNumberString;
             int idChecksum = (int.Parse(idBirthDate[0].ToString()) * (-1)) + (int.Parse(idBirthDate[1].ToString()) * 5) + (int.Parse(idBirthDate[2].ToString()) * 7) + (int.Parse(idBirthDate[4].ToString()) * 9) + (int.Parse(idBirthDate[4].ToString()) * 4) + (int.Parse(idNumberString[0].ToString()) * 6) + (int.Parse(idNumberString[1].ToString()) * 10) + (int.Parse(idNumberString[2].ToString()) * 5) + (int.Parse(idNumberString[3].ToString()) * 7);
+            int idCheckNumber = (idChecksum % 11) % 10;
 
-            return idBirthDate + idNumberString + idChecksum;
+            return idBirthDate + idNumberString + idCheckNumber.ToString();
         }
 
         private bool Contains(string vatId)
