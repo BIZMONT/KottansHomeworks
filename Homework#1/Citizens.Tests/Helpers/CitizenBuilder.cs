@@ -43,7 +43,7 @@ namespace Citizens.Tests.Helpers
 
         public ICitizen Build()
         {
-            var citizen = new Citizen(firstName, lastName, dateOfBirth, gender);
+            var citizen = new CitizenOfUkraine(firstName, lastName, dateOfBirth, gender);
             citizen.VatId = vatId;
             return citizen;
         }

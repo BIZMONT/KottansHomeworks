@@ -3,25 +3,25 @@ using Humanizer;
 
 namespace Citizens
 {
-    public class CitizenRegistry : ICitizenRegistry
+    public class CitizenOfUkraineRegistry : ICitizenRegistry
     {
         private ICitizen[] citizens;
         private int count;
         private uint length;
         private DateTime lastRegistrationTime;
 
-        public CitizenRegistry()
+        public CitizenOfUkraineRegistry()
         {
             length = 20;
             count = 0;
-            citizens = new Citizen[length];
+            citizens = new CitizenOfUkraine[length];
         }
 
-        public CitizenRegistry(uint length)
+        public CitizenOfUkraineRegistry(uint length)
         {
             this.length = length;
             count = 0;
-            citizens = new Citizen[length];
+            citizens = new CitizenOfUkraine[length];
         }
 
         public ICitizen this[string id]
@@ -113,7 +113,15 @@ namespace Citizens
 
             string idNumberString = idNumber.ToString();
             idNumberString = new string('0', 4 - idNumberString.Length) + idNumberString;
-            int idChecksum = (int.Parse(idBirthDate[0].ToString()) * (-1)) + (int.Parse(idBirthDate[1].ToString()) * 5) + (int.Parse(idBirthDate[2].ToString()) * 7) + (int.Parse(idBirthDate[4].ToString()) * 9) + (int.Parse(idBirthDate[4].ToString()) * 4) + (int.Parse(idNumberString[0].ToString()) * 6) + (int.Parse(idNumberString[1].ToString()) * 10) + (int.Parse(idNumberString[2].ToString()) * 5) + (int.Parse(idNumberString[3].ToString()) * 7);
+            int idChecksum = (int.Parse(idBirthDate[0].ToString()) * (-1)) +
+                (int.Parse(idBirthDate[1].ToString()) * 5) +
+                (int.Parse(idBirthDate[2].ToString()) * 7) +
+                (int.Parse(idBirthDate[3].ToString()) * 9) +
+                (int.Parse(idBirthDate[4].ToString()) * 4) +
+                (int.Parse(idNumberString[0].ToString()) * 6) +
+                (int.Parse(idNumberString[1].ToString()) * 10) +
+                (int.Parse(idNumberString[2].ToString()) * 5) +
+                (int.Parse(idNumberString[3].ToString()) * 7);
             int idCheckNumber = (idChecksum % 11) % 10;
 
             return idBirthDate + idNumberString + idCheckNumber.ToString();
